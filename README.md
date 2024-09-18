@@ -4,7 +4,7 @@
 
   ## Steps to Run:
 1. Clone the repository from github:
-   1. git clone https://github.com/nina-simon/stacksyn.git
+   1. git clone https://github.com/nina-simon/stacksync.git
    2. cd stacksync
 2. Buid Docker Image
    1. docker build -t flask-nsjail-app .
