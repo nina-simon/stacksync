@@ -8,17 +8,18 @@ app = Flask(__name__)
 def execute():
     data = request.get_json()
     script = data.get('script')
+    print(script)
     if not script:
         return jsonify({"error": "No script provided"}), 400
 
-    with open("script.py", "w") as file:
+    with open("/app/script-result.py", "w") as file:
         file.write(script)
 
     result = subprocess.run(
-        ["nsjail", "--config", "nsjail.cfg", "--", "python3", "-c",
-         "import script; output = script.main()"],
-        capture_output=True, text=True)
+    ["nsjail", "--config", "nsjail.cfg", "--", "/usr/local/bin/python3", "script-result.py"],
+    capture_output=True, text=True)
 
+    print(result)
     if result.returncode != 0:
         return jsonify({"error": "Error in executing script"}), 500
 
@@ -30,4 +31,4 @@ def execute():
     return jsonify({"result": main_result, "stdout": result.stderr})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(debug=True, host='0.0.0.0', port=8080)

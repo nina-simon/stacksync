@@ -16,7 +16,7 @@
 
 curl -X POST http://localhost:8080/execute \
 -H "Content-Type: application/json" \
--d '{"script":"def main():\\n    return {\"message\": \"Hello, World!\"}"}'
+-d '{"script":"def main():    return {\"message\": \"Hello, World!\"}"}'
 
 ## Example Response
 
